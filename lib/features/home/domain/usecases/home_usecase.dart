@@ -2,6 +2,7 @@ import 'package:disposer/disposer.dart';
 import 'package:petli_test_app/common/models/photo_model.dart';
 import 'package:petli_test_app/common/services/navigation_service.dart';
 import 'package:petli_test_app/features/home/domain/repositories/home_local_repository.dart';
+import 'package:petli_test_app/features/home/presentation/widgets/details_widget.dart';
 import '../entities/home_entitie.dart';
 import '../repositories/home_remote_repository.dart';
 
@@ -35,7 +36,9 @@ class HomeUsecase with Disposable {
     navigationService.showError('Can\'t find any photos');
   }
 
-  void show(Photo photo) {}
+  void show(Photo photo) {
+    navigationService.showPopup(DetailsWidget(photo: photo.url));
+  }
 
   void addToFavorite(Photo photo) {
     localRepository.saveToFavorites(photo.id);

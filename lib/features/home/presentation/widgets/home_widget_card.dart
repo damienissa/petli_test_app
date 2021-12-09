@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:petli_test_app/common/constants/app_constants.dart';
 import 'package:petli_test_app/common/design_system/ds_colors.dart';
 import 'package:petli_test_app/features/home/domain/entities/home_entitie.dart';
 
@@ -49,8 +50,13 @@ class HomeWidgetCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  CachedNetworkImage(
-                    imageUrl: card.image,
+                  Hero(
+                    tag: AppConstants.imageHeroTag,
+                    child: CachedNetworkImage(
+                      imageUrl: card.image,
+                      progressIndicatorBuilder: (context, url, progress) =>
+                          const CircularProgressIndicator(),
+                    ),
                   ),
                   CupertinoButton(
                     onPressed: () => onFavoriteToggle(card),

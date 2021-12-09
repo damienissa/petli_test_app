@@ -1,7 +1,12 @@
 import '../../domain/entities/home_entitie.dart';
 
 class HomeViewState {
-  final HomeEntitie entitie;
-
-  HomeViewState({required this.entitie});
+  HomeEntitie entitie;
+  final Function(PhotoCard) onCardSelected;
+  final Function(PhotoCard) onFavoriteToggle;
+  HomeViewState({
+    required this.entitie,
+    required this.onCardSelected,
+    required this.onFavoriteToggle,
+  });
 }

@@ -14,10 +14,20 @@ class HomeViewModel with ChangeNotifier, Disposable, StreamListenable {
   List<Disposable> get disposables => [usecase];
 
   final HomeUsecase usecase;
-  HomeViewState state = HomeViewState(entitie: HomeEntitie([]));
+  late HomeViewState state = HomeViewState(
+      entitie: HomeEntitie([]),
+      onCardSelected: (PhotoCard card) {
+        usecase.show(card.photo);
+      },
+      onFavoriteToggle: (PhotoCard card) {
+        card.isFavorite = !card.isFavorite;
+        card.isFavorite
+            ? usecase.addToFavorite(card.photo)
+            : usecase.removeFromFavorite(card.photo);
+      });
 
   void fetch() async {
-    state = HomeViewState(entitie: await usecase.fetchEntitie());
+    state.entitie = await usecase.fetchEntitie();
     notifyListeners();
   }
 }

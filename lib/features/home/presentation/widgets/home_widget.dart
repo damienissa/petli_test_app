@@ -22,12 +22,13 @@ class HomeWidget extends StatelessWidget {
           BuildContext context,
           int index,
         ) {
-          return HomeWidgetCard(
-            card: _photos[index],
-            onCardSelected: (PhotoCard card) {},
-            onFavoriteToggle: (PhotoCard card) {
-              card.isFavorite = !card.isFavorite;
-            },
+          return Padding(
+            padding: EdgeInsets.only(top: index == 0 ? 16.0 : 0.0),
+            child: HomeWidgetCard(
+              card: _photos[index],
+              onCardSelected: state.onCardSelected,
+              onFavoriteToggle: state.onFavoriteToggle,
+            ),
           );
         },
         itemCount: _photos.length,
